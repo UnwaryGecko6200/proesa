@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PROESA Esotéricos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --negro: #0a0a0a;
+      --oscuro: #111118;
+      --morado: #2a0a3a;
+      --dorado: #c9a84c;
+      --dorado-claro: #e8c97a;
+      --blanco: #f0eae0;
+      --gris: #8a8090;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--negro);
+      color: var(--blanco);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dorado);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--blanco);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--dorado); }
+
+    /* ─── PRESENTACIÓN ───────────────────────────────── */
+    #presentacion {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #presentacion::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(42,10,58,0.7) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 30% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .estrella-deco {
+      position: absolute;
+      color: var(--dorado);
+      font-size: 1rem;
+      opacity: 0.3;
+      animation: parpadeo 4s ease-in-out infinite;
+    }
+    @keyframes parpadeo {
+      0%, 100% { opacity: 0.1; }
+      50%       { opacity: 0.4; }
+    }
+    .subtitulo-hero {
+      font-size: 0.75rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    .titulo-hero {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .titulo-hero em { font-style: italic; color: var(--dorado-claro); }
+    .linea-dorada {
+      width: 60px; height: 1px;
+      background: var(--dorado);
+      margin: 2rem auto;
+      opacity: 0.6;
+    }
+    .descripcion-hero {
+      max-width: 560px;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--gris);
+      margin-bottom: 3rem;
+    }
+    .stats { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+    .stat {
+      text-align: center;
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 1.5rem 2rem;
+      background: rgba(255,255,255,0.02);
+    }
+    .stat-numero {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--dorado);
+      display: block;
+    }
+    .stat-texto {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-top: 0.3rem;
+    }
+
+    /* ─── CATÁLOGO ───────────────────────────────────── */
+    #catalogo {
+      padding: 7rem 4rem;
+      background: var(--oscuro);
+      position: relative;
+    }
+    #catalogo::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+      opacity: 0.4;
+    }
+    .seccion-encabezado { text-align: center; margin-bottom: 4rem; }
+    .seccion-label {
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .seccion-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+    }
+
+    /* Grid generado por JS */
+    .categorias {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .categoria-card {
+      border: 1px solid rgba(201,168,76,0.15);
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.4s, transform 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .categoria-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--dorado);
+      transition: width 0.4s;
+    }
+    .categoria-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
+    .categoria-card:hover::after { width: 100%; }
+
+    .card-hint {
+      position: absolute;
+      top: 0.7rem; right: 0.7rem;
+      background: rgba(10,10,10,0.75);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--dorado);
+      font-size: 0.6rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .card-img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      display: block;
+      background: rgba(0,0,0,0.2);
+    }
+    .card-body { padding: 1.4rem; }
+    .card-nombre {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--gris);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.9rem;
+      border-top: 1px solid rgba(201,168,76,0.12);
+    }
+    .card-precio {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--dorado);
+    }
+    .card-ver {
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      opacity: 0.7;
+    }
+
+    .nota-mayorista {
+      text-align: center;
+      margin: 3rem auto 0;
+      padding: 1.5rem 2rem;
+      border: 1px solid rgba(201,168,76,0.2);
+      max-width: 600px;
+      background: rgba(42,10,58,0.2);
+    }
+    .nota-mayorista p { font-size: 0.85rem; color: var(--gris); line-height: 1.7; }
+    .nota-mayorista strong { color: var(--dorado); }
+
+    /* ─── MODAL ──────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      backdrop-filter: blur(8px);
+    }
+    .modal-overlay.activo { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--oscuro);
+      border: 1px solid rgba(201,168,76,0.3);
+      max-width: 540px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-overlay.activo .modal { transform: translateY(0); }
+
+    .modal-cerrar {
+      position: absolute;
+      top: 0.8rem; right: 0.8rem;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--dorado);
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+    .modal-cerrar:hover { background: rgba(201,168,76,0.25); }
+
+    .modal-img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      display: block;
+      background: rgba(0,0,0,0.25);
+      padding: 1rem;
+    }
+
+    .modal-body { padding: 1.5rem 1.8rem 1.8rem; }
+
+    .modal-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      margin-bottom: 0.25rem;
+    }
+    .modal-precio {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--dorado);
+      opacity: 0.8;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .modal-desc {
+      font-size: 0.83rem;
+      color: var(--gris);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .modal-linea { width: 40px; height: 1px; background: var(--dorado); opacity: 0.4; margin-bottom: 1.2rem; }
+
+    /* Lista de variantes */
+    .modal-variantes-titulo {
+      font-size: 0.63rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 0.7rem;
+    }
+    .modal-variantes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.6rem;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    /* Scrollbar sutil */
+    .modal-variantes::-webkit-scrollbar { width: 4px; }
+    .modal-variantes::-webkit-scrollbar-track { background: transparent; }
+    .modal-variantes::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.3); border-radius: 2px; }
+
+    .modal-variantes li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(201,168,76,0.1);
+      background: rgba(255,255,255,0.02);
+      font-size: 0.82rem;
+      color: var(--blanco);
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .modal-variantes li:hover {
+      border-color: rgba(201,168,76,0.35);
+      background: rgba(201,168,76,0.05);
+    }
+    .v-nombre { flex: 1; }
+    .v-precio {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--dorado);
+      margin-left: 1rem;
+      white-space: nowrap;
+      opacity: 0.85;
+    }
+
+    .modal-btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.9rem;
+      background: var(--dorado);
+      color: var(--negro);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      font-family: 'Raleway', sans-serif;
+    }
+    .modal-btn-wa:hover { background: var(--dorado-claro); }
+    .modal-btn-wa svg { width: 18px; height: 18px; fill: var(--negro); flex-shrink: 0; }
+
+    /* ─── PEDIDO ─────────────────────────────────────── */
+    #pedido {
+      padding: 7rem 4rem;
+      text-align: center;
+      position: relative;
+    }
+    #pedido::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+      opacity: 0.4;
+    }
+    .pedido-contenido { max-width: 680px; margin: 0 auto; }
+    .pedido-intro { font-size: 0.95rem; color: var(--gris); line-height: 1.9; margin-bottom: 3rem; }
+    .pasos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+      text-align: left;
+    }
+    .paso { padding: 1.8rem 1.5rem; border: 1px solid rgba(201,168,76,0.15); background: rgba(255,255,255,0.02); }
+    .paso-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--dorado); opacity: 0.4; display: block; margin-bottom: 0.5rem; }
+    .paso-titulo { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; letter-spacing: 1px; }
+    .paso-desc { font-size: 0.78rem; color: var(--gris); line-height: 1.6; }
+
+    .btn-wa-principal {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1.1rem 2.8rem;
+      background: var(--dorado);
+      color: var(--negro);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: background 0.3s, transform 0.2s;
+      font-family: 'Raleway', sans-serif;
+    }
+    .btn-wa-principal:hover { background: var(--dorado-claro); transform: translateY(-2px); }
+    .btn-wa-principal svg { width: 20px; height: 20px; fill: var(--negro); }
+
+    .info-contacto { margin-top: 2.5rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .info-item { text-align: center; }
+    .info-label { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.3rem; display: block; }
+    .info-valor { font-size: 0.85rem; color: var(--gris); }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer {
+      border-top: 1px solid rgba(201,168,76,0.1);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--dorado); letter-spacing: 3px; }
+    .footer-copy { font-size: 0.72rem; color: var(--gris); opacity: 0.6; }
+
+    /* ─── WhatsApp flotante ──────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      z-index: 200;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      #catalogo, #pedido { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+      .stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">PROESA Esotéricos</div>
+    <ul class="nav-links">
+      <li><a href="#presentacion">Inicio</a></li>
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#pedido">Hacer Pedido</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ PRESENTACIÓN ════════════════════════════════ -->
+  <section id="presentacion">
+    <span class="estrella-deco" style="top:15%;left:8%;animation-delay:0s">✦</span>
+    <span class="estrella-deco" style="top:25%;right:10%;animation-delay:1.5s">✧</span>
+    <span class="estrella-deco" style="top:70%;left:5%;animation-delay:2s">✦</span>
+    <span class="estrella-deco" style="top:80%;right:7%;animation-delay:0.8s">✧</span>
+    <p class="subtitulo-hero">Distribución Mayorista · Productos Esotéricos</p>
+    <h1 class="titulo-hero">Originales del<br><em>Mercado Sonora</em></h1>
+    <div class="linea-dorada"></div>
+    <p class="descripcion-hero">
+      Fabricamos y distribuimos al por mayor una amplia gama de productos esotéricos
+      de alta calidad. Somos el proveedor de confianza de tiendas especializadas
+      en México y Centro América.
+    </p>
+    <div class="stats">
+      <div class="stat"><span class="stat-numero">100</span><span class="stat-texto">Referencias en catálogo</span></div>
+      <div class="stat"><span class="stat-numero">30</span><span class="stat-texto">Años de experiencia</span></div>
+      <div class="stat"><span class="stat-numero">+200</span><span class="stat-texto">Distribuidores activos</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ CATÁLOGO (generado por JS) ═════════════════ -->
+  <section id="catalogo">
+    <div class="seccion-encabezado">
+      <span class="seccion-label">Lo que ofrecemos</span>
+      <h2 class="seccion-titulo">Nuestro Catálogo</h2>
+      <div class="linea-dorada"></div>
+    </div>
+    <div class="categorias" id="gridProductos"></div>
+    <div class="nota-mayorista">
+      <p>Pedido mínimo desde <strong>150 USD</strong> por orden. Contáctanos para recibir el catálogo completo con precios de mayorista.</p>
+    </div>
+  </section>
+
+  <!-- ═══ MODAL ════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-cerrar" id="modalCerrar">✕</button>
+      <img src="" alt="" class="modal-img" id="modalImg"/>
+      <div class="modal-body">
+        <h2 class="modal-titulo" id="modalTitulo"></h2>
+        <span class="modal-precio" id="modalPrecio"></span>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-linea"></div>
+        <p class="modal-variantes-titulo">Variantes disponibles</p>
+        <ul class="modal-variantes" id="modalVariantes"></ul>
+        <a href="#" class="modal-btn-wa" id="modalBtnWa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PEDIDO ═══════════════════════════════════════ -->
+  <section id="pedido">
+    <div class="pedido-contenido">
+      <div class="seccion-encabezado">
+        <span class="seccion-label">Es muy sencillo</span>
+        <h2 class="seccion-titulo">Cómo Hacer Tu Pedido</h2>
+        <div class="linea-dorada"></div>
+      </div>
+      <p class="pedido-intro">
+        Trabajamos directamente con tiendas, distribuidores y emprendedores del sector.
+        Escríbenos por WhatsApp, cuéntanos qué necesitas y te asesoramos sin compromiso.
+      </p>
+      <div class="pasos">
+        <div class="paso"><span class="paso-num">01</span><p class="paso-titulo">Escríbenos</p><p class="paso-desc">Contacta por WhatsApp indicando tu negocio y los productos que te interesan.</p></div>
+        <div class="paso"><span class="paso-num">02</span><p class="paso-titulo">Recibe el catálogo</p><p class="paso-desc">Te enviamos el catálogo completo con precios de mayorista y disponibilidad.</p></div>
+        <div class="paso"><span class="paso-num">03</span><p class="paso-titulo">Confirma tu pedido</p><p class="paso-desc">Acuerda cantidades, condiciones y método de pago con nuestro equipo.</p></div>
+        <div class="paso"><span class="paso-num">04</span><p class="paso-titulo">Recibe en tu tienda</p><p class="paso-desc">Gestionamos el envío. Tiempo estimado: 3-5 días hábiles.</p></div>
+      </div>
+      <!-- EDITAR: número de WhatsApp -->
+      <a href="wa.me/525548918220" class="btn-wa-principal" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escribirnos por WhatsApp
+      </a>
+      <div class="info-contacto">
+        <div class="info-item"><span class="info-label">Horario</span><span class="info-valor">Lun – Vie · 9:00 a 18:00</span></div>
+        <div class="info-item"><span class="info-label">Email</span><span class="info-valor">gabrielcureno1012@gmail.com</span></div>
+        <div class="info-item"><span class="info-label">Respuesta</span><span class="info-valor">En menos de 24 horas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Proesa Esotéricos</div>
+    <p class="footer-copy">© 2026 Proesa Esotéricos · Todos los derechos reservados</p>
+  </footer>
+
+  <!-- EDITAR: número en el botón flotante -->
+  <a href="wa.me/525548918220" class="wa-float" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Carga primero los datos, luego el script principal -->
+  <script src="productos.js"></script>
+  <script>
+    // ═══════════════════════════════════════════════════
+    // EDITAR: solo tu número de WhatsApp aquí abajo
+    // Formato: código país + número (sin + ni espacios)
+    // Ejemplo México: 5215512345678
+    // ═══════════════════════════════════════════════════
+    const WA_NUM = '525548918220';
+
+    // ── Generar tarjetas desde productos.js ──────────
+    const grid = document.getElementById('gridProductos');
+    productos.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'categoria-card';
+      card.dataset.index = i;
+      card.innerHTML = `
+        <span class="card-hint">Ver variantes</span>
+        <img src="${p.img}" alt="${p.titulo}" class="card-img"/>
+        <div class="card-body">
+          <h3 class="card-nombre">${p.titulo}</h3>
+          <p class="card-desc">${p.descripcion}</p>
+          <div class="card-footer">
+            <span class="card-precio">${p.precioBase}</span>
+            <span class="card-ver">Ver variantes →</span>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // ── Modal ────────────────────────────────────────
+    const overlay    = document.getElementById('modalOverlay');
+    const modalImg   = document.getElementById('modalImg');
+    const modalTit   = document.getElementById('modalTitulo');
+    const modalPre   = document.getElementById('modalPrecio');
+    const modalDesc  = document.getElementById('modalDesc');
+    const modalList  = document.getElementById('modalVariantes');
+    const modalBtnWa = document.getElementById('modalBtnWa');
+
+    document.getElementById('gridProductos').addEventListener('click', e => {
+      const card = e.target.closest('.categoria-card');
+      if (!card) return;
+      const p = productos[card.dataset.index];
+
+      modalImg.src         = p.img;
+      modalImg.alt         = p.titulo;
+      modalTit.textContent = p.titulo;
+      modalPre.textContent = p.precioBase;
+      modalDesc.textContent = p.descripcion;
+
+      modalList.innerHTML = '';
+      p.variantes.forEach(v => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="v-nombre">${v.nombre}</span>
+          ${v.precio ? `<span class="v-precio">${v.precio}</span>` : ''}
+        `;
+        modalList.appendChild(li);
+      });
+
+      const msg = encodeURIComponent(`Hola, quiero información sobre ${p.titulo}`);
+      modalBtnWa.href = `https://wa.me/${WA_NUM}?text=${msg}`;
+
+      overlay.classList.add('activo');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function cerrar() {
+      overlay.classList.remove('activo');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('modalCerrar').addEventListener('click', cerrar);
+    overlay.addEventListener('click', e => { if (e.target === overlay) cerrar(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrar(); });
+  </script>
+
+</body>
+</html>
